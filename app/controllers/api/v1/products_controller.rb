@@ -1,6 +1,7 @@
 module Api::V1
   class ProductsController < ApplicationController
     before_action :set_product, only: %i[ show update destroy ]
+    protect_from_forgery with: :null_session
 
     # GET /products
     # GET /products.json

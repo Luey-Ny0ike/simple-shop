@@ -1,6 +1,7 @@
 module Api::V1
   class RegionsController < ApplicationController
     before_action :set_region, only: %i[ show update destroy ]
+    protect_from_forgery with: :null_session
 
     # GET /regions
     # GET /regions.json
