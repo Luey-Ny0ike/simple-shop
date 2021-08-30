@@ -1,1 +1,1 @@
-json.array! @regions, partial: "regions/region", as: :region
+json.array! @regions, partial: "api/v1/regions/region", as: :region
