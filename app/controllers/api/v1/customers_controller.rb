@@ -20,7 +20,7 @@ module Api::V1
       @customer = Customer.new(customer_params)
 
       if @customer.save
-        render :show, status: :created, location: @customer
+        render :show, status: :created
       else
         render json: @customer.errors, status: :unprocessable_entity
       end
@@ -30,7 +30,7 @@ module Api::V1
     # PATCH/PUT /customers/1.json
     def update
       if @customer.update(customer_params)
-        render :show, status: :ok, location: @customer
+        render :show, status: :ok
       else
         render json: @customer.errors, status: :unprocessable_entity
       end

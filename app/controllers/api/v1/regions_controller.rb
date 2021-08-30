@@ -20,7 +20,7 @@ module Api::V1
       @region = Region.new(region_params)
 
       if @region.save
-        render :show, status: :created, location: @region
+        render :show, status: :created
       else
         render json: @region.errors, status: :unprocessable_entity
       end
@@ -30,7 +30,7 @@ module Api::V1
     # PATCH/PUT /regions/1.json
     def update
       if @region.update(region_params)
-        render :show, status: :ok, location: @region
+        render :show, status: :ok
       else
         render json: @region.errors, status: :unprocessable_entity
       end

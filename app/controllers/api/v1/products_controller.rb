@@ -17,10 +17,10 @@ module Api::V1
     # POST /products
     # POST /products.json
     def create
-      @product = Product.new(product_params)
+      @product = @region.products.new(product_params)
 
       if @product.save
-        render :show, status: :created, location: @product
+        render :show, status: :created
       else
         render json: @product.errors, status: :unprocessable_entity
       end
@@ -29,8 +29,8 @@ module Api::V1
     # PATCH/PUT /products/1
     # PATCH/PUT /products/1.json
     def update
-      if @product.update(product_params)
-        render :show, status: :ok, location: @product
+      if @region.products.update(product_params)
+        render :show, status: :ok
       else
         render json: @product.errors, status: :unprocessable_entity
       end
