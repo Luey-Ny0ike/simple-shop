@@ -48,6 +48,6 @@ class RegionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def region_params
-      params.fetch(:region, {})
+      params.require(:region).permit(:title, :country_details, :tax_details, :currency_details)
     end
 end
