@@ -18,4 +18,10 @@ class Order < ApplicationRecord
       item.product.price # * item.quantity when we eventually process quantity
     }
   end
+
+  def mock_payment
+    status = ["complete", "failed"].sample
+    self.update(status: status)
+    # We can then call a mailer method to send and email notification or SmS notification
+  end
 end
