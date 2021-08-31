@@ -1,7 +1,7 @@
 module Api::V1
   class OrdersController < ApplicationController
     before_action :set_order, only: %i[ show update destroy ]
-
+    protect_from_forgery with: :null_session
     # GET /orders
     # GET /orders.json
     def index
@@ -49,7 +49,7 @@ module Api::V1
 
       # Only allow a list of trusted parameters through.
       def order_params
-        params.require(:order).permit(:full_name, :email, :total_amount)
+        params.require(:order).permit(:full_name, :email, :total_amount, :customer_id)
       end
   end
 end
