@@ -1,4 +1,4 @@
-json.extract! order, :id, :full_name, :email, :total_amount, :created_at, :updated_at
+json.extract! order, :id, :full_name, :email, :total_amount, :status, :created_at, :updated_at
 json.order_items(order.order_items) do |order_item|
   json.products do
     json.extract! order_item.product, :id, :title, :price, :sku
