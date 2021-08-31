@@ -17,8 +17,9 @@ module Api::V1
     # POST /orders.json
     def create
       @order = Order.new(order_params)
-
       if @order.save
+        @order.create_order_items #check Order model for this custom method
+        @order.update(total_amount: @order.total_price) 
         render :show, status: :created
       else
         render json: @order.errors, status: :unprocessable_entity
