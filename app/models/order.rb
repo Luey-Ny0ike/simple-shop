@@ -12,4 +12,10 @@ class Order < ApplicationRecord
       OrderItem.create(order_id: self.id, product_id: p.id)
     end
   end
+
+  def total_price
+    order_items.to_a.sum { |item|
+      item.product.price # * item.quantity when we eventually process quantity
+    }
+  end
 end
