@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :customers
       resources :regions
       resources :products
+      resources :orders
     end
   end
 end
