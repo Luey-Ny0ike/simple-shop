@@ -75,6 +75,12 @@ GEM
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
     crass (1.0.6)
+    daemons (1.4.1)
+    delayed_job (4.1.9)
+      activesupport (>= 3.0, < 6.2)
+    delayed_job_active_record (4.1.6)
+      activerecord (>= 3.0, < 6.2)
+      delayed_job (>= 3.0, < 5)
     erubi (1.10.0)
     ffi (1.15.3)
     globalid (0.5.2)
@@ -209,6 +215,8 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
+  daemons
+  delayed_job_active_record
   jbuilder (~> 2.7)
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
