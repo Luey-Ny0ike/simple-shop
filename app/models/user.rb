@@ -21,4 +21,19 @@ class User < ApplicationRecord
       Customer.create(email: user.email, user_id: user.id)
     end
   end
+
+  def make_admin
+    user = self
+    admin = Admin.find_by(email: user.email)
+    if admin.present?
+      admin.update(user_id: user.id)
+    else
+      Admin.create(email: user.email, user_id: user.id)
+    end
+  end
+
+  def remove_admin
+    admin = self.admin
+    admin.destroy
+  end
 end
