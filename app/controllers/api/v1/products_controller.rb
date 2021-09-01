@@ -2,7 +2,8 @@ module Api::V1
   class ProductsController < ApplicationController
     before_action :set_product, only: %i[ show update destroy ]
     # before_action :set_region, only: %i[ create update ] disabled this for now
-    protect_from_forgery with: :null_session
+    before_action :authenticate_user!, only: [:create, :update, :destroy]
+    before_action :authenticate_admin!, only: [:create, :update, :destroy]
 
     # GET /products
     # GET /products.json
@@ -47,6 +48,12 @@ module Api::V1
       # Use callbacks to share common setup or constraints between actions.
       def set_product
         @product = Product.find(params[:id])
+      end
+
+      def authenticate_admin!
+        unless user_signed_in? && current_user.admin.present?
+          render json: {message: 'Only Admins can perform this action' }, status: :unprocessable_entity
+        end
       end
 
       # def set_region

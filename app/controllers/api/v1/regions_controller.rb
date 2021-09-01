@@ -1,6 +1,8 @@
 module Api::V1
   class RegionsController < ApplicationController
     before_action :set_region, only: %i[ show update destroy ]
+    before_action :authenticate_user!, only: [:create, :update, :destroy]
+    before_action :authenticate_admin!, only: [:create, :update, :destroy]
     protect_from_forgery with: :null_session
 
     # GET /regions
@@ -46,6 +48,12 @@ module Api::V1
       # Use callbacks to share common setup or constraints between actions.
       def set_region
         @region = Region.find(params[:id])
+      end
+
+      def authenticate_admin!
+        unless user_signed_in? && current_user.admin.present?
+          render json: {message: 'Only Admins can perform this action' }, status: :unprocessable_entity
+        end
       end
 
       # Only allow a list of trusted parameters through.

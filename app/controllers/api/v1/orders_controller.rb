@@ -1,6 +1,8 @@
 module Api::V1
   class OrdersController < ApplicationController
     before_action :set_order, only: %i[ show update destroy ]
+    before_action :authenticate_user!
+    before_action :authenticate_admin!, only: [:show, :index]
     protect_from_forgery with: :null_session
     # GET /orders
     # GET /orders.json
@@ -47,6 +49,12 @@ module Api::V1
       # Use callbacks to share common setup or constraints between actions.
       def set_order
         @order = Order.find(params[:id])
+      end
+
+      def authenticate_admin!
+        unless user_signed_in? && current_user.admin.present?
+          render json: {message: 'Only Admins can perform this action' }, status: :unprocessable_entity
+        end
       end
 
       # Only allow a list of trusted parameters through.
