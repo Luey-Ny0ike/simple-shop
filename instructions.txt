@@ -1,0 +1,15 @@
+Docker is disabled for now, I run into issues setting it up so I disabled it temporarily.
+To setup the small project,
+run bundle install
+run yarn install
+update the database.yml file to match your db credentials.
+Create a master.key under the config folder and add 4b9f42e9c0198d8623580c96b9a10fa8. This is required for credentials decryption
+run rails:db create - to create the db
+run rails:db migrate - to run the migrations
+run rails:db seed - to add the sample data.
+run bin/delayed_job start - to start the delayed jobs. I used this to mock the payment step
+Finally run rails s to boot the server.
+
+
+I am submiting this due to the delays I have already accumilated, I am working on the dockerized version and will push it ASAP. Apologies
+for the inconvinence
