@@ -2,6 +2,7 @@ module Api::V1
   class CustomersController < ApplicationController
     before_action :set_customer, only: %i[ show update destroy ]
     protect_from_forgery with: :null_session
+    before_action :authenticate_user!
 
     # GET /customers
     # GET /customers.json
