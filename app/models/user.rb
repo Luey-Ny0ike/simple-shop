@@ -9,4 +9,15 @@ class User < ApplicationRecord
   # Associations
   has_one :customer
   has_one :admin
+
+  # CUSTOM METHODS
+  def create_customer
+    user = self
+    customer = Customer.find_by(email: user.email)
+    if customer.present?
+      customer.update(user_id: user.id)
+    else
+      Customer.create(email: user.email, user_id: user.id)
+    end
+  end
 end
