@@ -3,6 +3,10 @@ class Order < ApplicationRecord
   belongs_to :customer
   has_many :order_items
 
+  # Validations
+  validates_presence_of :full_name
+  validates_presence_of :email
+  
   # custom methods
   def create_order_items
     # We will eventually process this using params from the associated cart
