@@ -13,5 +13,21 @@ services:
     image: redis:6.0.2-alpine
     ports:
       - "7002:6379"
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+  # delayed_job:
+  #   build: .
+  #   command: bin/delayed_job start
+  #   volumes:
+  #     - .:/myapp
+  #   depends_on:
+  #     - db
 volumes:
   data:
