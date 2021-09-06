@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+  after_create :run_after_create
   # Associations
   belongs_to :customer
   has_many :order_items
@@ -6,7 +7,7 @@ class Order < ApplicationRecord
   # Validations
   validates_presence_of :full_name
   validates_presence_of :email
-  
+
   # custom methods
   def create_order_items
     # We will eventually process this using params from the associated cart
@@ -27,5 +28,11 @@ class Order < ApplicationRecord
     status = ["complete", "failed"].sample
     self.update(status: status)
     # We can then call a mailer method to send and email notification or SmS notification
+  end
+
+  def run_after_create
+    self.create_order_items
+    self.update(total_amount: self.total_price)
+    self.delay(run_at: 1.minute.from_now).mock_payment
   end
 end

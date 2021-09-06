@@ -20,9 +20,7 @@ module Api::V1
     def create
       @order = Order.new(order_params)
       if @order.save
-        @order.create_order_items #check Order model for this custom method
-        @order.update(total_amount: @order.total_price)
-        @order.delay(run_at: 1.minute.from_now).mock_payment
+        #check Order model for this custom methods
         render :show, status: :created
       else
         render json: @order.errors, status: :unprocessable_entity
