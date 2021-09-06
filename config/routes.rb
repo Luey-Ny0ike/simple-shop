@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       sessions: 'users/sessions',
       registrations: 'users/registrations'
     }
-    get 'current_user', to: 'current_user#index'
+    get 'users/current_user', to: 'users/current_user#index'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :api, defaults: {format: :json } do
